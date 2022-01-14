@@ -39,7 +39,7 @@ export default async function email(req, res) {
     if(!result) throw new Error('Something went wrong');
 
     
-    return res.status(200).end()
+    return res.status(200).json({})
 
   } catch(err) {
     return res.status(400).json({err: err.message})
