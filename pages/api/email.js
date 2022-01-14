@@ -1,3 +1,4 @@
+import Cors from 'cors'
 import { Client as FaunaClient, query as q } from "faunadb"
 
 const client = new FaunaClient({
