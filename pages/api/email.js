@@ -1,4 +1,3 @@
-import Cors from 'cors'
 import { Client as FaunaClient, query as q } from "faunadb"
 
 const client = new FaunaClient({
@@ -14,7 +13,17 @@ const validateEmail = (email) => {
 };
 
 export default async function email(req, res) {
-  await cors(req, res);
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // another option
+  // res.setHeader('Access-Control-Allow-Origin', req.header.origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
   const email = req.body.email;
 
@@ -35,24 +44,4 @@ export default async function email(req, res) {
   } catch(err) {
     return res.status(400).json({err: err.message})
   }
-}
-
-const cors = initMiddleware(
-  // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-  Cors({
-    origin: "*",
-    methods: ['POST', 'OPTIONS'],
-  })
-)
-
-function initMiddleware(middleware) {
-  return (req, res) =>
-    new Promise((resolve, reject) => {
-      middleware(req, res, (result) => {
-        if (result instanceof Error) {
-          return reject(result)
-        }
-        return resolve(result)
-      })
-    })
 }
