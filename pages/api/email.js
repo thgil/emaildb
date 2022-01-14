@@ -14,14 +14,7 @@ const validateEmail = (email) => {
 
 export default async function email(req, res) {
   const email = req.body.email;
-
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "POST");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-
+  
   try {
     if(!email) throw new Error('Something went wrong');
     if(!validateEmail(email)) throw new Error('Not a valid email');
