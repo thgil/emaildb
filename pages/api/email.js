@@ -17,7 +17,7 @@ export default async function email(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   // another option
   // res.setHeader('Access-Control-Allow-Origin', req.header.origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
   if (req.method === 'OPTIONS') {
