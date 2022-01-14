@@ -30,7 +30,7 @@ export default async function email(req, res) {
     if(!result) throw new Error('Something went wrong');
 
     
-    res.status(200).json({})
+    return res.status(200).end()
 
   } catch(err) {
     return res.status(400).json({err: err.message})
@@ -40,7 +40,7 @@ export default async function email(req, res) {
 const cors = initMiddleware(
   // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
   Cors({
-    // Only allow requests with GET, POST and OPTIONS
+    origin: "*",
     methods: ['POST', 'OPTIONS'],
   })
 )
